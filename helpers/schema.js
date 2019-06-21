@@ -1,12 +1,12 @@
 export function getSchemaFromField (field) {
   const schema = {}
-  const ignore = ['nullable', 'virtual']
+  const ignore = ['nullable', 'virtual', 'table', 'field', 'cascadeOnDelete']
 
   for (let key in field) {
     if (ignore.indexOf(key) < 0) {
       let value = field[key]
       if (key === 'type') {
-        if (value === 'id') {
+        if (value === 'id' || value === 'fk') {
           value = 'integer'
           schema.minimum = 1
         } else if (value === 'date') {
@@ -56,7 +56,7 @@ export function getSchemaFromTable (table, schemas) {
         props[field.name] = getSchemaFromField(field)
       }
 
-      if (!field.nullable && field.name !== 'id') {
+      if (!field.nullable && field.type !== 'id') {
         schema.required.push(field.name)
       }
     }
