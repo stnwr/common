@@ -49,14 +49,15 @@ export function getSchemaFromTable (table, schemas) {
     if (!field.virtual && field.type !== 'relation') {
       const props = schema.properties
       if (field.type === 'json') {
-        props[field.name] = schemas
-          ? schemas.find(s => s.field === field).schema
-          : { $ref: field.ref }
+        const schema = schemas.find(s => s.field === field)
+        props[field.name] = (schema && schema.schema) || {
+          type: (field.nullable ? ['object', 'null'] : 'object')
+        }
       } else {
         props[field.name] = getSchemaFromField(field)
       }
 
-      if (!field.nullable && field.type !== 'id') {
+      if (!field.nullable && !field.auto) {
         schema.required.push(field.name)
       }
     }

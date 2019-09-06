@@ -34,6 +34,68 @@
       "title": "Schema",
       "default": "person.json"
     },
+    "primaryKey": {
+      "title": "Primary key",
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "Include autoincrement column",
+          "properties": {
+            "name": {
+              "title": "Name",
+              "type": "string",
+              "default": "id"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        },
+        {
+          "title": "Choose a column",
+          "properties": {
+            "column": {
+              "title": "Name",
+              "type": "string",
+              "enum": [
+                "name",
+                "firstName",
+                "lastName"
+              ]
+            }
+          },
+          "required": [
+            "column"
+          ]
+        },
+        {
+          "title": "Composite primary key",
+          "properties": {
+            "columns": {
+              "title": "Columns",
+              "description": "Select each column in the key",
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "name",
+                  "firstName",
+                  "lastName"
+                ]
+              }
+            },
+            "name": {
+              "title": "Name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "columns"
+          ]
+        }
+      ]
+    },
     "indexes": {
       "type": "array",
       "title": "Indexes",
