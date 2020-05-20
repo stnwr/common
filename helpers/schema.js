@@ -2,7 +2,7 @@ export function getSchemaFromField (field) {
   const schema = {}
   const ignore = ['nullable', 'virtual', 'table', 'field', 'cascadeOnDelete']
 
-  for (let key in field) {
+  for (const key in field) {
     if (ignore.indexOf(key) < 0) {
       let value = field[key]
       if (key === 'type') {
@@ -76,7 +76,7 @@ export function generateUISchema (schema) {
   const { properties } = schema
   const hidden = ['id', 'createdAt', 'updatedAt']
 
-  for (let key in properties) {
+  for (const key in properties) {
     uiSchema[key] = {
       'ui:title': properties[key].title || key
     }
