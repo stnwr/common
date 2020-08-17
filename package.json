@@ -1,8 +1,7 @@
 {
   "name": "@stoneware/common",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Common file and utils for stoneware",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

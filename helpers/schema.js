@@ -1,4 +1,4 @@
-export function getSchemaFromField (field) {
+function getSchemaFromField (field) {
   const schema = {}
   const ignore = ['nullable', 'virtual', 'table', 'field', 'cascadeOnDelete']
 
@@ -32,7 +32,7 @@ export function getSchemaFromField (field) {
   return schema
 }
 
-export function getSchemaFromTable (table, schemas) {
+function getSchemaFromTable (table, schemas) {
   const schema = {
     type: 'object',
     required: [],
@@ -71,7 +71,7 @@ export function getSchemaFromTable (table, schemas) {
   return schema
 }
 
-export function generateUISchema (schema) {
+function generateUISchema (schema) {
   const uiSchema = {}
   const { properties } = schema
   const hidden = ['id', 'createdAt', 'updatedAt']
@@ -89,4 +89,10 @@ export function generateUISchema (schema) {
   }
 
   return uiSchema
+}
+
+module.exports = {
+  getSchemaFromField,
+  getSchemaFromTable,
+  generateUISchema
 }
